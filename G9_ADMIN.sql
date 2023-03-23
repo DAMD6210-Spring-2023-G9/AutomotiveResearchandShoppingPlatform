@@ -15,6 +15,7 @@ alter user zongyao quota unlimited on data;
 alter user fangyu quota unlimited on data;
 alter user ming quota unlimited on data;
 alter user G9 quota unlimited on data;
+
 -- show current user.
 SELECT
     user "USER"

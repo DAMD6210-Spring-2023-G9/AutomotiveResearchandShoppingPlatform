@@ -1,3 +1,4 @@
+show user;
 
 --CLEANUP SCRIPT
 set serveroutput on
@@ -6,8 +7,15 @@ declare
     v_sql varchar(2000);
 begin
    dbms_output.put_line('Start schema cleanup');
-   for i in (select 'EMP' table_name from dual union all
-             select 'DEPT' table_name from dual
+   for i in (select 'REVIEWS' table_name from dual union all
+             select 'FAVORITES' table_name from dual union all
+             select 'INVENTORY' table_name from dual union all
+             select 'CONVERSATION' table_name from dual union all
+             select 'FEATURES' table_name from dual union all
+             select 'CAR_MODEL' table_name from dual union all
+             select 'MANUFACTOR' table_name from dual union all
+             select 'DEALER' table_name from dual union all
+             select 'CUSTOMER' table_name from dual
    )
    loop
    dbms_output.put_line('....Drop table '||i.table_name);
@@ -34,9 +42,9 @@ end;
 
 --CREATE TABLES AS PER DATA MODEL
 create table customer (
-    cid number(12) constraint customer_pk primary key,
+    cid number(12) primary key,
     first_name varchar(50) not null,
-    last_name varchar(50) not null,
+    last_name varchar(50),
     address varchar(255),
     area_code number(3),
     phone_number number(18),
@@ -44,46 +52,90 @@ create table customer (
 )
 /
 create table dealer (
-    did number(8) constraint dealer_pk primary key,
-    first_name varchar(50) not null,
-    last_name varchar(50) not null,
+    did number(8) primary key,
+    dealer_name varchar(50) not null,
     address varchar(255),
-    area_code number(3),
-    phone_number number(18),
-    year_joined date
+    area_code number(3) not null,
+    phone_number number(18) not null,
+    year_joined date not null,
+    website varchar(100)
 )
 /
-create table emp (
-  empno number(4),
-  ename varchar2(10),
-  job varchar2(9),
-  mgr number(4,0),
-  hiredate date,
-  sal number(7,2),
-  comm number(7,2),
-  deptno number(4)
+create table manufactor (
+    fid number(6) primary key,
+    make_name varchar(50) not null,
+    country varchar(20),
+    descript varchar(255),
+    year_founded date
 )
 /
-insert into DEPT (DEPTNO, DNAME, LOC)
-  select 10, 'ACCOUNTING', 'NEW YORK' from dual union all
-  select 20, 'RESEARCH',   'DALLAS'   from dual union all
-  select 30, 'SALES',      'CHICAGO'  from dual union all
-  select 40, 'OPERATIONS', 'BOSTON'   from dual;
-  
-insert into emp (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-  select 7839, 'KING',   'PRESIDENT', null, to_date('17-11-1981','dd-mm-yyyy'),    5000, null, 10 from dual union all
-  select 7698, 'BLAKE',  'MANAGER',   7839, to_date('1-5-1981','dd-mm-yyyy'),      2850, null, 30 from dual union all
-  select 7782, 'CLARK',  'MANAGER',   7839, to_date('9-6-1981','dd-mm-yyyy'),      2450, null, 10 from dual union all
-  select 7566, 'JONES',  'MANAGER',   7839, to_date('2-4-1981','dd-mm-yyyy'),      2975, null, 20 from dual union all
-  select 7788, 'SCOTT',  'ANALYST',   7566, to_date('13-JUL-87','dd-mm-rr') - 85,  3000, null, 20 from dual union all
-  select 7902, 'FORD',   'ANALYST',   7566, to_date('3-12-1981','dd-mm-yyyy'),     3000, null, 20 from dual union all
-  select 7369, 'SMITH',  'CLERK',     7902, to_date('17-12-1980','dd-mm-yyyy'),     800, null, 20 from dual union all
-  select 7499, 'ALLEN',  'SALESMAN',  7698, to_date('20-2-1981','dd-mm-yyyy'),     1600,  300, 30 from dual union all
-  select 7521, 'WARD',   'SALESMAN',  7698, to_date('22-2-1981','dd-mm-yyyy'),     1250,  500, 30 from dual union all
-  select 7654, 'MARTIN', 'SALESMAN',  7698, to_date('28-9-1981','dd-mm-yyyy'),     1250, 1400, 30 from dual union all
-  select 7844, 'TURNER', 'SALESMAN',  7698, to_date('8-9-1981','dd-mm-yyyy'),      1500,    0, 30 from dual union all
-  select 7876, 'ADAMS',  'CLERK',     7788, to_date('13-JUL-87', 'dd-mm-rr') - 51, 1100, null, 20 from dual union all
-  select 7900, 'JAMES',  'CLERK',     7698, to_date('3-12-1981','dd-mm-yyyy'),      950, null, 30 from dual union all
-  select 7934, 'MILLER', 'CLERK',     7782, to_date('23-1-1982','dd-mm-yyyy'),     1300, null, 10 from dual;
+create table car_model (
+    mid number(12) primary key,
+    fid number(6) not null,
+    model_name varchar(50) not null,
+    model_trim varchar(50) default 'basic',
+    body_style varchar(10),
+    weight number(4),
+    year_introduced date
+)
+/
+create table features (
+    ftid number(10) primary key,
+    mid number(12),
+    cylinders number(2),
+    mpg varchar(20),
+    fuel varchar(5),
+    drive_type varchar(3),
+    transmission varchar(10),
+    sunroof char(1),
+    moonroof char(1),
+    heated_seats char(1),
+    multimedia char(1),
+    cruise_control char(1),
+    foreign key (mid) references car_model (mid)
+)
+/
+create table inventory (
+  vin VARCHAR(17) constraint inventory_pk primary key,
+  did number(8) not null,
+  mid number(12) not null,
+  interior_color varchar(20),
+  exterior_color varchar(20),
+  title varchar(10),
+  miles number(4),
+  date_added date,
+  is_hidden char(1),
+  foreign key (did) references dealer (did),
+  foreign key (mid) references car_model (mid)
+)
+/
+create table favorites (
+    faid number(30) constraint favorite_pk primary key,
+    cid number(12),
+    vin varchar(17),
+    date_added date,
+    foreign key (cid) references customer (cid),
+    foreign key (vin)  references inventory (vin)
+)
+/
+create table reviews (
+    rid number(31) constraint reviews_pk primary key,
+    cid number(12),
+    did number(8),
+    content varchar(225),
+    date_reviewed date,
+    foreign key (did) references dealer (did),
+    foreign key (cid) references customer (cid)    
+)
+/
+create table conversation (
+    cvid number(31) constraint conversation_pk primary key,
+    cid number(12),
+    did number(8),
+    content varchar(225),
+    date_connected date,
+    foreign key (did) references dealer (did),
+    foreign key (cid) references customer (cid)    
+)
+/
 
-commit;
