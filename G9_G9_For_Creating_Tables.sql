@@ -24,7 +24,8 @@ begin
        from USER_TABLES
        where TABLE_NAME=i.table_name;
 
-       v_sql := 'drop table '||i.table_name || ' purge';
+       v_sql := 'drop table '||i.table_name ||' purge';
+       dbms_output.put_line(v_sql);
        execute immediate v_sql;
        dbms_output.put_line('........Table '||i.table_name||' dropped successfully');
        
