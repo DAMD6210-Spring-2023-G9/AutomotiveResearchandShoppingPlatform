@@ -189,50 +189,50 @@ INSERT INTO manufacturer (fid, make_name, country, descript, year_founded) VALUE
 INSERT INTO manufacturer (fid, make_name, country, descript, year_founded) VALUES (manufacturer_id.nextval, 'Audi', 'Germany', 'German luxry car brand', '1909');
 INSERT INTO manufacturer (fid, make_name, country, descript, year_founded) VALUES (manufacturer_id.nextval, 'BMW', 'Germany', 'German luxry car brand', '1916');
 
-select * from g9.car_model;
-insert into g9.car_model values(car_model_id.nextval,3, 'A6', 'basic', 'sports car', 2500, to_date('2000-03-03', 'yyyy-mm-dd'));
-insert into g9.car_model values(car_model_id.nextval,4, '440i', 'xdrive-40', 'Sedan', 3000, to_date('2000-03-03', 'yyyy-mm-dd'));
-insert into g9.car_model values(car_model_id.nextval,3, 'Mustang', 'luxory', 'coupe', 4000, to_date('2010-12-01', 'yyyy-mm-dd'));
+select * from car_model;
+insert into car_model values(car_model_id.nextval,3, 'A6', 'basic', 'sports car', 2500, to_date('2000-03-03', 'yyyy-mm-dd'));
+insert into car_model values(car_model_id.nextval,4, '440i', 'xdrive-40', 'Sedan', 3000, to_date('2000-03-03', 'yyyy-mm-dd'));
+insert into car_model values(car_model_id.nextval,3, 'Mustang', 'luxory', 'coupe', 4000, to_date('2010-12-01', 'yyyy-mm-dd'));
 
-select * from g9.Features;
-insert into g9.Features values(features_id.nextval,1,4, '22/11', 'gas', '4wd', 'manual', '1', '0', '1','1','0');
-insert into g9.Features values(features_id.nextval,2,3, '12/3', 'gas', 'fwd', 'Auto', '0', '0', '0','1','0');
-insert into g9.Features values(features_id.nextval,3,2, '12/3', 'gas', '2wd', 'Auto', '1', '1', '0','1','1');
+select * from Features;
+insert into Features values(features_id.nextval,1,4, '22/11', 'gas', '4wd', 'manual', '1', '0', '1','1','0');
+insert into Features values(features_id.nextval,2,3, '12/3', 'gas', 'fwd', 'Auto', '0', '0', '0','1','0');
+insert into Features values(features_id.nextval,3,2, '12/3', 'gas', '2wd', 'Auto', '1', '1', '0','1','1');
 
 
-insert into g9.dealer values (dealer_id.nextval,'John Smith', '01 Clifton Street, Malden', 021, 781219223, to_date('2011-02-21', 'yyyy-mm-dd'), 'https://github.com/youngyangyang04'
+insert into dealer values (dealer_id.nextval,'John Smith', '01 Clifton Street, Malden', 021, 781219223, to_date('2011-02-21', 'yyyy-mm-dd'), 'https://github.com/youngyangyang04'
 );
-insert into g9.dealer values (dealer_id.nextval,'Brian', '01 Clifton Street, Malden', 021, 781219223, to_date('2011-02-21', 'yyyy-mm-dd'), 'https://youngyangyang'
+insert into dealer values (dealer_id.nextval,'Brian', '01 Clifton Street, Malden', 021, 781219223, to_date('2011-02-21', 'yyyy-mm-dd'), 'https://youngyangyang'
 );
-insert into g9.dealer values (dealer_id.nextval,'Williams', '01 Clifton Street, Malden', 021, 781219223, to_date('2011-02-21', 'yyyy-mm-dd'), 'https://youngyangyang04'
+insert into dealer values (dealer_id.nextval,'Williams', '01 Clifton Street, Malden', 021, 781219223, to_date('2011-02-21', 'yyyy-mm-dd'), 'https://youngyangyang04'
 );
-update g9.dealer set year_joined = to_date('2012-06-21', 'yyyy-mm-dd') where did = 1;
-update g9.dealer set year_joined = to_date('2009-05-01', 'yyyy-mm-dd') where did = 2;
+update dealer set year_joined = to_date('2012-06-21', 'yyyy-mm-dd') where did = 1;
+update dealer set year_joined = to_date('2009-05-01', 'yyyy-mm-dd') where did = 2;
 
-update g9.dealer set address = '01 Pleasant Street, Malden' where did = 1;
-update g9.dealer set address = '05 Terr Street, Malden' where did = 2;
+update dealer set address = '01 Pleasant Street, Malden' where did = 1;
+update dealer set address = '05 Terr Street, Malden' where did = 2;
 
-select * from g9.customer;
-insert into g9.customer values(customer_id.nextval,'Harry', 'Potter', '4 Privet Drive', 001, 0987652345, to_date('1998-09-20', 'yyyy-mm-dd'));
-insert into g9.customer values(customer_id.nextval,'Ron', 'Weasley', 'Hogwards', 002, 0987652344, to_date('1999-10-20', 'yyyy-mm-dd'));
-insert into g9.customer values(customer_id.nextval,'Jack', 'Williams', 'Hogwards', 002, 0987652354, to_date('2001-03-10', 'yyyy-mm-dd'));
+select * from customer;
+insert into customer values(customer_id.nextval,'Harry', 'Potter', '4 Privet Drive', 001, 0987652345, to_date('1998-09-20', 'yyyy-mm-dd'));
+insert into customer values(customer_id.nextval,'Ron', 'Weasley', 'Hogwards', 002, 0987652344, to_date('1999-10-20', 'yyyy-mm-dd'));
+insert into customer values(customer_id.nextval,'Jack', 'Williams', 'Hogwards', 002, 0987652354, to_date('2001-03-10', 'yyyy-mm-dd'));
 
-select * from g9.connections;
-insert into g9.connections values(connections_id.nextval, 000001, 2, 'can price go any lower?', to_date('2023-02-02', 'yyyy-mm-dd'));
-insert into g9.connections values(connections_id.nextval, 000002, 1, 'can I get your number?', to_date('2023-02-03', 'yyyy-mm-dd'));
-insert into g9.connections values(connections_id.nextval, 000002, 3, 'how is the car condition?', to_date('2023-01-23', 'yyyy-mm-dd'));
+select * from connections;
+insert into connections values(connections_id.nextval, 000001, 2, 'can price go any lower?', to_date('2023-02-02', 'yyyy-mm-dd'));
+insert into connections values(connections_id.nextval, 000002, 1, 'can I get your number?', to_date('2023-02-03', 'yyyy-mm-dd'));
+insert into connections values(connections_id.nextval, 000002, 3, 'how is the car condition?', to_date('2023-01-23', 'yyyy-mm-dd'));
 
-insert into g9.inventory values('LGWEFSEE3DFA333F2',1,1,'Black', 'red', 'clean', '2000', to_date('2000-01-03', 'yyyy-mm-dd') , '0');
-insert into g9.inventory values('LGWSSSDE3DFAWS3SS',2,2,'white', 'white', 'clean', '3000', to_date('2019-01-03', 'yyyy-mm-dd') , '0');
-insert into g9.inventory values('LVWEDDSEE3EFA534F',2,3,'Grey', 'Black', 'clean', '3050', to_date('2021-11-21', 'yyyy-mm-dd') , '0');
-select interior_color from g9.inventory where vin='LVWEDDSEE3EFA534F';
+insert into inventory values('LGWEFSEE3DFA333F2',1,1,'Black', 'red', 'clean', '2000', to_date('2000-01-03', 'yyyy-mm-dd') , '0');
+insert into inventory values('LGWSSSDE3DFAWS3SS',2,2,'white', 'white', 'clean', '3000', to_date('2019-01-03', 'yyyy-mm-dd') , '0');
+insert into inventory values('LVWEDDSEE3EFA534F',2,3,'Grey', 'Black', 'clean', '3050', to_date('2021-11-21', 'yyyy-mm-dd') , '0');
+select interior_color from inventory where vin='LVWEDDSEE3EFA534F';
 
-insert into g9.Reviews values(reviews_id.nextval,1,1,'i like it',to_date('2018-03-12','yyyy-mm-dd'));
-insert into g9.Reviews values(reviews_id.nextval,2,1,'i love the car so much',to_date('2022-04-12','yyyy-mm-dd'));
-insert into g9.Reviews values(reviews_id.nextval,3,2,'everything is great',to_date('2021-03-22','yyyy-mm-dd'));
+insert into Reviews values(reviews_id.nextval,1,1,'i like it',to_date('2018-03-12','yyyy-mm-dd'));
+insert into Reviews values(reviews_id.nextval,2,1,'i love the car so much',to_date('2022-04-12','yyyy-mm-dd'));
+insert into Reviews values(reviews_id.nextval,3,2,'everything is great',to_date('2021-03-22','yyyy-mm-dd'));
 
-insert into g9.favorites values(favorites_id.nextval,1,'LGWEFSEE3DFA333F2',to_date('2019-03-08','yyyy-mm-dd'));
-insert into g9.favorites values(favorites_id.nextval,2,'LGWSSSDE3DFAWS3SS',to_date('2020-04-11','yyyy-mm-dd'));
-insert into g9.favorites values(favorites_id.nextval,3,'LVWEDDSEE3EFA534F',to_date('2019-05-10','yyyy-mm-dd'));
+insert into favorites values(favorites_id.nextval,1,'LGWEFSEE3DFA333F2',to_date('2019-03-08','yyyy-mm-dd'));
+insert into favorites values(favorites_id.nextval,2,'LGWSSSDE3DFAWS3SS',to_date('2020-04-11','yyyy-mm-dd'));
+insert into favorites values(favorites_id.nextval,3,'LVWEDDSEE3EFA534F',to_date('2019-05-10','yyyy-mm-dd'));
 
 commit;
