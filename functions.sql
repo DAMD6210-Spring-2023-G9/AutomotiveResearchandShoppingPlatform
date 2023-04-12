@@ -1,7 +1,4 @@
 set serveroutput on;
-CREATE SEQUENCE customer_seq
-START WITH 1
-INCREMENT BY 1;
 
 CREATE OR REPLACE FUNCTION user_register (
   first_name VARCHAR2,
@@ -23,7 +20,7 @@ BEGIN
   
   -- insert new customer
   INSERT INTO customer (cid, first_name, last_name, address, area_code, phone_number, year_joined)
-  VALUES (customer_seq.NEXTVAL, first_name, last_name, address, area_code, phone_number, SYSDATE);
+  VALUES (CUSTOMER_ID.NEXTVAL, first_name, last_name, address, area_code, phone_number, SYSDATE);
   
   COMMIT;
   RETURN 1;
@@ -32,23 +29,22 @@ EXCEPTION
     ROLLBACK;
     RAISE;
 END;
-
+/
 
 DECLARE
   result NUMBER;
 BEGIN
-  result := user_register('Lam', 'Doe', '123 Main St', 123, 5551234, 'john.doe@example.com', 'password123');
+  result := user_register('Louie', 'JJ', '123 Main St', 123, 5551234, 'john.doe@example.com', 'password123');
   IF result = 1 THEN
     DBMS_OUTPUT.PUT_LINE('User registration successful');
   ELSE
     DBMS_OUTPUT.PUT_LINE('User registration failed');
   END IF;
 END;
-
 /
-CREATE SEQUENCE dealer_seq
-START WITH 1
-INCREMENT BY 1;
+select * from customer;
+/
+
 
 CREATE OR REPLACE FUNCTION check_name_uniqueness(
     p_dealer_name IN VARCHAR2
@@ -85,7 +81,7 @@ BEGIN
         RETURN 0;
     END IF;
     
-    SELECT dealer_seq.NEXTVAL INTO v_did FROM DUAL;
+    SELECT dealer_id.NEXTVAL INTO v_did FROM DUAL;
     
     INSERT INTO dealer (
         did,
@@ -113,6 +109,7 @@ EXCEPTION
 END;
 
 /
+
 DECLARE
     v_result NUMBER;
 BEGIN
