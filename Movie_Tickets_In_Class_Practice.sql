@@ -80,7 +80,7 @@ if pi_first_name is null or pi_last_name is null then
     raise ex_invalid_name;
 end if;
 
-merge into customers
+merge into customers tgt
     using (
         select pi_email as email, pi_first_name fname, pi_last_name lname, 'Y' is_active from dual
     )   src

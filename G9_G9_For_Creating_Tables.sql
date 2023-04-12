@@ -147,6 +147,7 @@ create table inventory (
   vin VARCHAR(17) primary key,
   did number(8) not null,
   mid number(12) not null,
+  ftid number(10) not null,
   interior_color varchar(20),
   exterior_color varchar(20),
   title varchar(10),
@@ -154,7 +155,8 @@ create table inventory (
   date_added date,
   is_hidden char(1),
   foreign key (did) references dealer (did),
-  foreign key (mid) references car_model (mid)
+  foreign key (mid) references car_model (mid),
+  foreign key (ftid) references car_model (ftid)
 )
 /
 create table favorites (
