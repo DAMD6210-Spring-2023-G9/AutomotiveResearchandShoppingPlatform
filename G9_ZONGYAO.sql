@@ -3,7 +3,29 @@ show user;
 create table TEST (
     test_id NUMBER PRIMARY KEY
     );
-
+    
+CREATE VIEW vehicle_listing_view AS 
+SELECT 
+    inv.vin,
+    man.make_name,
+    cm.model_name,
+    cm.model_trim,
+    cm.year_introduced,
+    inv.miles,
+    inv.interior_color,
+    inv.exterior_color,
+    inv.title,
+    d.dealer_name,
+    d.address,
+    d.area_code,
+    d.phone_number,
+    inv.date_added
+FROM 
+    g9.inventory inv
+    JOIN g9.car_model cm ON inv.mid = cm.mid
+    JOIN g9.manufacturer man ON cm.fid = man.fid
+    JOIN g9.dealer d ON inv.did = d.did;
+/
 grant all on TEST to FANGYU, MING;
 
 select * from g9.dealer;
