@@ -90,7 +90,7 @@ create table customer (
     last_name varchar(50),
     address varchar(255),
     area_code number(3),
-    phone_number number(18),
+    phone_number number(18) unique,
     year_joined date
 )
 /
@@ -100,7 +100,7 @@ create table dealer (
     dealer_name varchar(50) not null,
     address varchar(255),
     area_code number(3) not null,
-    phone_number number(18) not null,
+    phone_number number(18) not null unique,
     year_joined date not null,
     website varchar(100)
 )
@@ -108,7 +108,7 @@ create table dealer (
 /
 create table manufacturer (
     fid number(6) default manufacturer_id.nextval primary key,
-    make_name varchar(50) not null,
+    make_name varchar(50) not null unique,
     country varchar(20),
     descript varchar(255),
     year_founded varchar(4)
