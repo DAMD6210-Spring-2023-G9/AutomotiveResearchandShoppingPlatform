@@ -48,4 +48,6 @@ alter user G9 quota unlimited on data;
 
 -- give access to developers
 grant resource to zongyao, fangyu, ming, G9;
+grant create view to zongyao, ming, fangyu, G9;
+
 
