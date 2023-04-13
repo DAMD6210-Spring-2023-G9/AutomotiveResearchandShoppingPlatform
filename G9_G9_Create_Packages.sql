@@ -8,8 +8,8 @@ end pkg_customer_mgmt;
 
 create or replace package pkg_dealer_mgmt as
     function upsert_dealer (pi_dealer_name varchar, pi_email varchar, pi_address varchar, pi_area_code varchar, pi_phone_number varchar, pi_website varchar) return number;
-    function get_dealer_registration (pi_email varchar) return number;
-    function get_dealer_registration (pi_dealer_name varchar) return number;
+    function get_dealer_registration (pi_input varchar) return number;
+--    function get_dealer_registration (pi_dealer_name varchar) return number;
 end pkg_dealer_mgmt;
 /
 

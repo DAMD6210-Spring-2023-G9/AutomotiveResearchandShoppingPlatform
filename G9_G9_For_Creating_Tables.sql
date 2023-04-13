@@ -124,7 +124,7 @@ create table car_model (
     model_trim varchar(50) default 'basic',
     body_style varchar(10),
     weight number(4),
-    year_introduced date
+    year_introduced date not null
 )
 /
 create table features (
@@ -156,7 +156,7 @@ create table inventory (
   is_hidden char(1),
   foreign key (did) references dealer (did),
   foreign key (mid) references car_model (mid),
-  foreign key (ftid) references car_model (ftid)
+  foreign key (ftid) references features (ftid)
 )
 /
 create table favorites (
@@ -195,9 +195,9 @@ INSERT INTO manufacturer (fid, make_name, country, descript, year_founded) VALUE
 INSERT INTO manufacturer (fid, make_name, country, descript, year_founded) VALUES (manufacturer_id.nextval, 'BMW', 'Germany', 'German luxry car brand', '1916');
 
 select * from manufacturer;
-insert into car_model values(car_model_id.nextval,70003, 'A6', 'basic', 'sports car', 2500, to_date('2000-03-03', 'yyyy-mm-dd'));
-insert into car_model values(car_model_id.nextval,70004, '440i', 'xdrive-40', 'Sedan', 3000, to_date('2000-03-03', 'yyyy-mm-dd'));
-insert into car_model values(car_model_id.nextval,70003, 'Mustang', 'luxory', 'coupe', 4000, to_date('2010-12-01', 'yyyy-mm-dd'));
+insert into car_model values(car_model_id.nextval,700003, 'A6', 'basic', 'sports car', 2500, to_date('2000-03-03', 'yyyy-mm-dd'));
+insert into car_model values(car_model_id.nextval,700004, '440i', 'xdrive-40', 'Sedan', 3000, to_date('2000-03-03', 'yyyy-mm-dd'));
+insert into car_model values(car_model_id.nextval,700003, 'Mustang', 'luxory', 'coupe', 4000, to_date('2010-12-01', 'yyyy-mm-dd'));
 
 select * from Features;
 insert into Features values(features_id.nextval,300000000001,4, '22/11', 'gas', '4wd', 'manual', '1', '0', '1','1','0');
@@ -228,9 +228,9 @@ insert into connections values(connections_id.nextval, 100000000001, 10000002, '
 insert into connections values(connections_id.nextval, 100000000003, 10000002, 'how is the car condition?', to_date('2023-01-23', 'yyyy-mm-dd'));
 
 select * from dealer;
-insert into inventory values('LGWEFSEE3DFA333F2',10000001,300000000001,'Black', 'red', 'clean', '2000', to_date('2000-01-03', 'yyyy-mm-dd') , '0');
-insert into inventory values('LGWSSSDE3DFAWS3SS',10000002,300000000002,'white', 'white', 'clean', '3000', to_date('2019-01-03', 'yyyy-mm-dd') , '0');
-insert into inventory values('LVWEDDSEE3EFA534F',10000002,300000000003,'Grey', 'Black', 'clean', '3050', to_date('2021-11-21', 'yyyy-mm-dd') , '0');
+insert into inventory values('LGWEFSEE3DFA333F2',10000001,300000000001, 5000000001,'Black', 'red', 'clean', '2000', to_date('2000-01-03', 'yyyy-mm-dd') , '0');
+insert into inventory values('LGWSSSDE3DFAWS3SS',10000002,300000000002, 5000000002,'white', 'white', 'clean', '3000', to_date('2019-01-03', 'yyyy-mm-dd') , '0');
+insert into inventory values('LVWEDDSEE3EFA534F',10000002,300000000003, 5000000003,'Grey', 'Black', 'clean', '3050', to_date('2021-11-21', 'yyyy-mm-dd') , '0');
 select interior_color from inventory where vin='LVWEDDSEE3EFA534F';
 
 insert into Reviews values(reviews_id.nextval,100000000001,10000001,'i like it',to_date('2018-03-12','yyyy-mm-dd'));

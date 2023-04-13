@@ -59,15 +59,20 @@ begin
 end;
 
 
-
+/
 -- Test pkg_car_model_mgmt
+describe g9.pkg_car_model_mgmt;
+select * from g9.car_model;
 DECLARE 
-    v_did number;
+    v_mid number;
 begin
-    v_did:=g9.pkg_dealer_mgmt.upsert_dealer('Northeastern Car Sales', 'car.sales@northeastern.edu', '360 Huntington St.', '302', '519559', 'carsale.northeastern.edu');
-    dbms_output.put_line(to_char(v_did));
-    v_did:=g9.pkg_dealer_mgmt.get_dealer_registration ('car.sales@northeastern.edu');
-    dbms_output.put_line('Found dealer with email car.sales@northeastern.edu cid is: ' || to_char(v_did));
-    v_did:=g9.pkg_dealer_mgmt.get_dealer_registration ('Northeastern Car Sales');
-    dbms_output.put_line('Found dealer with name Northeastern Car Sales cid is: ' || to_char(v_did));
+    v_mid:=g9.pkg_car_model_mgmt.upsert_model('Ford', 'Escape', 'basic', 'SUV', '2000', '2000-03-03');
+    dbms_output.put_line(to_char(v_mid));
 end;
+/
+
+--select * from g9.car_model where model_name = 'A6' and model_trim='basic' and year_introduced=to_date('2000-03-03','yyyy-mm-dd');
+
+-- Test pkg_favorites_mgmt
+
+--

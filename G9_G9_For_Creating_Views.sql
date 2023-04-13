@@ -62,7 +62,6 @@ FROM
     JOIN dealer d ON inv.did = d.did;
 /
 describe vehicle_listing_view;
---select * from vehicle_listing_view;
 -- select dealer_name, phone_number from dealer;
 -- update dealer set phone_number=959663 where dealer_name='ABC Motors';
 
@@ -79,6 +78,8 @@ FROM
 /
 describe dealer_reviews;
 
+
+
 --Dealerships View
 CREATE VIEW Dealerships AS
 SELECT d.dealer_name,
@@ -90,7 +91,10 @@ From
     dealer d;
 /
 describe dealerships;
-       
+
+
+
+
 --Vehicle Model Detailed View
 CREATE VIEW vehicle_model_detailed_view AS
 SELECT cm.model_name, m.make_name, f.cylinders, f.mpg, f.fuel, f.drive_type, f.transmission,
@@ -112,7 +116,6 @@ JOIN car_model cm ON i.mid = cm.mid;
 /
 describe dealer_inventory_view;
 
-
 --Favorite Vehicle View
 CREATE VIEW favorite_vehicle_view AS
 SELECT 
@@ -120,6 +123,7 @@ SELECT
   c.first_name || ' ' || c.last_name AS customer_name, 
   i.vin, 
   m.make_name, 
+  cm.fid as car_make_fid,
   cm.model_name,
   cm.model_trim,
   i.interior_color, 
@@ -130,19 +134,23 @@ FROM
   favorites f 
   JOIN customer c ON f.cid = c.cid 
   JOIN inventory i ON f.vin = i.vin 
-  JOIN car_model cm ON i.mid = cm.mid 
-  JOIN manufacturer m ON cm.fid = m.fid;
+  JOIN car_model cm ON i.mid = cm.mid
+  JOIN manufacturer m ON m.fid = cm.fid;
 /
 describe favorite_vehicle_view;
 
 COMMIT;
+--
+select * from favorite_vehicle_view;
+select * from dealer_inventory_view;
+select * from dealerships;
+select * from vehicle_listing_view;
+select * from dealer_reviews;
+select * from vehicle_model_detailed_view;
 
-
-
-
-
-
-
-
-
-
+grant all on vehicle_listing_view to ming, zongyao, fangyu;
+grant all on dealer_reviews to ming, zongyao, fangyu;
+grant all on dealerships to ming, zongyao, fangyu;
+grant all on vehicle_model_detailed_view to ming, zongyao, fangyu;
+grant all on dealer_inventory_view to ming, zongyao, fangyu;
+grant all on favorite_vehicle_view to ming, zongyao, fangyu;
