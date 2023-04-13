@@ -26,15 +26,15 @@ end pkg_manufacturer_mgmt;
 /
 
 
---create or replace package pkg_inventory_mgmt as
---    function upsert_inventory (pi_dealer_name varchar, pi_vin varchar, pi_make varchar, pi_interior_color varchar, pi_exterior_color varchar, pi_title varchar, pi_miles varchar, pi_is_hidden varchar) return number;
---    
---end pkg_inventory_mgmt;
---/
+create or replace package pkg_inventory_mgmt as
+    procedure upsert_inventory (pi_dealer_id number, pi_vin varchar, pi_mid number, pi_ftid number, pi_interior_color varchar, pi_exterior_color varchar, pi_title varchar, pi_miles varchar, pi_is_hidden varchar);
+    procedure delete_inventory (pi_vin varchar);
+end pkg_inventory_mgmt;
+/
 
 create or replace package pkg_features_mgmt as
-    procedure insert_features (pi_mid number, pi_cylinders number, pi_mpg varchar, pi_fuel varchar, pi_drive_type varchar, pi_transmission varchar, SUNROOF char, MOONROOF char, HEATED_SEATS char,MULTIMEDIA char, CRUISE_CONTROL char);
-    procedure update_features (pi_ftid number, pi_mid number, pi_cylinders number, pi_mpg varchar, pi_fuel varchar, pi_drive_type varchar, pi_transmission varchar, pi_SUNROOF char, pi_MOONROOF char, pi_HEATED_SEATS char,pi_MULTIMEDIA char, pi_CRUISE_CONTROL char);
+    procedure insert_features (pi_vin varchar, pi_cylinders number, pi_mpg varchar, pi_fuel varchar, pi_drive_type varchar, pi_transmission varchar, SUNROOF char, MOONROOF char, HEATED_SEATS char,MULTIMEDIA char, CRUISE_CONTROL char);
+    procedure update_features (pi_vin varchar, pi_cylinders number, pi_mpg varchar, pi_fuel varchar, pi_drive_type varchar, pi_transmission varchar, pi_SUNROOF char, pi_MOONROOF char, pi_HEATED_SEATS char,pi_MULTIMEDIA char, pi_CRUISE_CONTROL char);
 
 end pkg_features_mgmt;
 /

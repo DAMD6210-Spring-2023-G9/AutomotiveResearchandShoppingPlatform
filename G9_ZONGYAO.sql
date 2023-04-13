@@ -89,10 +89,36 @@ select * from g9.manufacturer where make_name='Jeep';
 
 -- Test pkg_features_mgmt
 select * from g9.features;
-exec g9.pkg_features_mgmt.insert_features(300000000003, 6, '18/22', 'gas', 'le', 'Auto', 'y', 'y', 'y','y', 'y');
+exec g9.pkg_features_mgmt.insert_features('AAAAAAAAAAAAAAAAA', 6, '18/22', 'gas', 'le', 'Auto', 'y', 'y', 'y','y', 'y');
 exec g9.pkg_features_mgmt.update_features(5000000006, 300000000003, 6, '18/22', 'gas', '4wd', 'Auto', '1', '1', '1','1', '1');
 
 
 /
 
 select * from g9.manufacturer where make_name='Jeep';
+
+
+-- Test pkg_inventory_mgmt
+select * from g9.inventory;
+select * from g9.features;
+exec g9.pkg_inventory_mgmt.upsert_inventory (10000001, 'AAAAAAAAAAAAAAAAA', 300000000001, 2222222222, 'Black', 'Blue', 'clean', '156543', '1');
+exec g9.pkg_inventory_mgmt.delete_inventory ('AAAAAAAAAAAAAAAAA');
+
+insert into g9.inventory (
+                did,
+                vin,
+                mid,
+                ftid,
+                interior_color,
+                exterior_color,
+                title,
+                miles,
+                is_hidden)
+            values (
+                10000001,
+                'AAAAAAAAAAAAAAAAA',
+                300000000001,
+                -1,
+                'Black', 'Blue', 'clean', '156543', '1');
+commit;
+

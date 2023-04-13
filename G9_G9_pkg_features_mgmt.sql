@@ -1,15 +1,14 @@
 create or replace package body pkg_features_mgmt as
-    procedure insert_features (pi_mid number, pi_cylinders number, pi_mpg varchar, pi_fuel varchar, pi_drive_type varchar, pi_transmission varchar, SUNROOF char, MOONROOF char, HEATED_SEATS char,MULTIMEDIA char, CRUISE_CONTROL char)
+    procedure insert_features (pi_vin varchar, pi_cylinders number, pi_mpg varchar, pi_fuel varchar, pi_drive_type varchar, pi_transmission varchar, SUNROOF char, MOONROOF char, HEATED_SEATS char,MULTIMEDIA char, CRUISE_CONTROL char)
     is
         ex_null_arg exception;
         
     begin
-        if pi_mid is null then
+        if pi_vin is null then
             raise ex_null_arg;
         end if;
         insert into features (
-            ftid,
-            mid,
+            vin,
             cylinders,
             mpg,
             fuel,
@@ -21,8 +20,7 @@ create or replace package body pkg_features_mgmt as
             multimedia,
             cruise_control)
         values (
-            features_id.nextval,
-            pi_mid,
+            pi_vin,
             pi_cylinders ,
             pi_mpg ,
             pi_fuel ,
@@ -46,16 +44,16 @@ create or replace package body pkg_features_mgmt as
     
     
     
-    procedure update_features (pi_ftid number, pi_mid number, pi_cylinders number, pi_mpg varchar, pi_fuel varchar, pi_drive_type varchar, pi_transmission varchar, pi_SUNROOF char, pi_MOONROOF char, pi_HEATED_SEATS char,pi_MULTIMEDIA char, pi_CRUISE_CONTROL char)
+    procedure update_features (pi_vin varchar, pi_cylinders number, pi_mpg varchar, pi_fuel varchar, pi_drive_type varchar, pi_transmission varchar, pi_SUNROOF char, pi_MOONROOF char, pi_HEATED_SEATS char,pi_MULTIMEDIA char, pi_CRUISE_CONTROL char)
     is
         ex_null_arg exception;
         
     begin
-        if pi_mid is null or pi_ftid is null then
+        if pi_vin is null then
             raise ex_null_arg;
         end if;
         update features set
-            mid=pi_mid,
+            vin=pi_vin,
             cylinders=pi_cylinders,
             mpg=pi_mpg,
             fuel=pi_fuel,
@@ -66,7 +64,7 @@ create or replace package body pkg_features_mgmt as
             heated_seats=pi_HEATED_SEATS,
             multimedia=pi_MULTIMEDIA ,
             cruise_control=pi_CRUISE_CONTROL
-        where ftid=pi_ftid;
+        where vin=pi_vin;
     dbms_output.put_line('Successfully updated.');
 
     exception
