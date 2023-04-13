@@ -27,8 +27,9 @@ end pkg_manufacturer_mgmt;
 
 
 create or replace package pkg_inventory_mgmt as
-    procedure upsert_inventory (pi_dealer_id number, pi_vin varchar, pi_mid number, pi_ftid number, pi_interior_color varchar, pi_exterior_color varchar, pi_title varchar, pi_miles varchar, pi_is_hidden varchar);
+    procedure upsert_inventory (pi_dealer_id number, pi_vin varchar, pi_mid number, pi_interior_color varchar, pi_exterior_color varchar, pi_title varchar, pi_miles varchar, pi_is_hidden varchar);
     procedure delete_inventory (pi_vin varchar);
+
 end pkg_inventory_mgmt;
 /
 
@@ -38,6 +39,23 @@ create or replace package pkg_features_mgmt as
 
 end pkg_features_mgmt;
 /
+create or replace package pkg_connections_mgmt as
+    procedure create_connection (pi_cid number, pi_did number, pi_content varchar);
+
+end pkg_connections_mgmt;
+/
+create or replace package pkg_reviews_mgmt as
+    procedure write_review (pi_cid number, pi_did number, pi_content varchar);
+    procedure delete_review (pi_rid number);
+    procedure update_review (pi_rid number, pi_content varchar);
+
+end pkg_reviews_mgmt;
+/
+create or replace package pkg_favorites_mgmt as
+    procedure add_favorite (pi_cid number, pi_vin varchar);
+    procedure delete_favorite (pi_faid number);
+end pkg_favorites_mgmt;
+/
 
 grant execute on pkg_customer_mgmt to zongyao, fangyu, ming;
 grant execute on pkg_dealer_mgmt to zongyao, fangyu, ming;
@@ -45,3 +63,6 @@ grant execute on pkg_car_model_mgmt to zongyao, fangyu, ming;
 grant execute on pkg_manufacturer_mgmt to zongyao, fangyu, ming;
 grant execute on pkg_inventory_mgmt to zongyao, fangyu, ming;
 grant execute on pkg_features_mgmt to zongyao, fangyu, ming;
+grant execute on pkg_connections_mgmt to zongyao, fangyu, ming;
+grant execute on pkg_reviews_mgmt to zongyao, fangyu, ming;
+grant execute on pkg_favorites_mgmt to zongyao, fangyu, ming;

@@ -55,8 +55,38 @@ end;
 select * from g9.manufacturer where make_name='Jeep';
 
 
+-- Test pkg_inventory_mgmt
+select * from g9.inventory;
+exec g9.pkg_inventory_mgmt.upsert_inventory (10000003, 'AAAAAAAAAAAAAAAAA', 300000000001, 'Black', 'Blue', 'clean', '156543', '1');
+exec g9.pkg_inventory_mgmt.delete_inventory ('AAAAAAAAAAAAAAAAA');
+
+
 -- Test pkg_features_mgmt
 select * from g9.features;
-exec g9.pkg_features_mgmt.insert_features(300000000003, 6, '18/22', 'gas', 'le', 'Auto', 'y', 'y', 'y','y', 'y');
+exec g9.pkg_features_mgmt.insert_features('AAAAAAAAAAAAAAAAA', 6, '18/22', 'gas', 'le', 'Auto', 'y', 'y', 'y','y', 'y');
 exec g9.pkg_features_mgmt.update_features(5000000006, 300000000003, 6, '18/22', 'gas', '4wd', 'Auto', '1', '1', '1','1', '1');
+/
+
+
+-- Test pkg_connections_mgmt
+select * from g9.connections;
+exec g9.pkg_connections_mgmt.create_connection(100000000002, 10000003, 'Hello.');
+/
+
+-- Test pkg_reviews_mgmt
+select * from g9.reviews;
+exec g9.pkg_reviews_mgmt.write_review(100000000002, 10000003, 'It is good.');
+exec g9.pkg_reviews_mgmt.update_review(2000000000000000000000000004, 'Modified: it is the best.');
+exec g9.pkg_reviews_mgmt.delete_review(2000000000000000000000000004);
+/
+
+-- Test pkg_favorites_mgmt
+select * from g9.favorites;
+exec g9.pkg_favorites_mgmt.add_favorite(100000000002, 'LGWEFSEE3DFA333F2');
+exec g9.pkg_favorites_mgmt.delete_favorite(4);
+/
+
+commit;
+
+
 

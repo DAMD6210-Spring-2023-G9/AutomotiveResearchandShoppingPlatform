@@ -1,5 +1,5 @@
 create or replace package body pkg_inventory_mgmt as
-    procedure upsert_inventory (pi_dealer_id number, pi_vin varchar, pi_mid number, pi_ftid number, pi_interior_color varchar, pi_exterior_color varchar, pi_title varchar, pi_miles varchar, pi_is_hidden varchar)
+    procedure upsert_inventory (pi_dealer_id number, pi_vin varchar, pi_mid number, pi_interior_color varchar, pi_exterior_color varchar, pi_title varchar, pi_miles varchar, pi_is_hidden varchar)
         is
             ex_null_arg exception;
         begin
@@ -9,8 +9,7 @@ create or replace package body pkg_inventory_mgmt as
             merge into inventory tgt using (select 
                 pi_dealer_id pi_dealer_id, 
                 pi_vin vin, 
-                pi_mid mid, 
-                pi_ftid ft_id,
+                pi_mid mid,
                 pi_interior_color interior, 
                 pi_exterior_color exterior, 
                 pi_title title, 
@@ -18,17 +17,16 @@ create or replace package body pkg_inventory_mgmt as
                 pi_is_hidden is_hidden from dual) src on ( tgt.vin=src.vin)
             when matched then update set 
                 tgt.did = src.pi_dealer_id,
-                tgt.mid = mid,
-                tgt.ftid = ft_id,
+                tgt.mid = src.mid,
                 tgt.interior_color=src.interior,
                 tgt.exterior_color = src.exterior,
                 tgt.title=src.title,
+                tgt.miles=src.miles,
                 tgt.is_hidden=src.is_hidden
             when not matched then insert (
-                did,
                 vin,
+                did,
                 mid,
-                ftid,
                 interior_color,
                 exterior_color,
                 title,
@@ -38,7 +36,6 @@ create or replace package body pkg_inventory_mgmt as
                 pi_vin,
                 pi_dealer_id,
                 pi_mid,
-                pi_ftid,
                 pi_interior_color,
                 pi_exterior_color,
                 pi_title,
@@ -61,14 +58,17 @@ create or replace package body pkg_inventory_mgmt as
             if pi_vin is null then
                 raise ex_null_arg;
             end if;
+            delete from features where vin=pi_vin;
             delete from inventory where vin=pi_vin;
+            commit;
     exception
             when ex_null_arg then
                 dbms_output.put_line('pi_dealer_id');
             when others then
                 dbms_output.put_line(SQLERRM);
-    commit;
+    
     end delete_inventory;
+    
 end pkg_inventory_mgmt;
 /
 

@@ -131,7 +131,6 @@ create table inventory (
   vin VARCHAR(17) primary key,
   did number(8) not null,
   mid number(12) not null,
-  ftid number(10),
   interior_color varchar(20),
   exterior_color varchar(20),
   title varchar(10),
@@ -152,7 +151,8 @@ create table features (
     moonroof char(1),
     heated_seats char(1),
     multimedia char(1),
-    cruise_control char(1)
+    cruise_control char(1),
+    foreign key (vin) references inventory (vin)
 )
 /
 create table favorites (
@@ -219,9 +219,9 @@ insert into connections values(connections_id.nextval, 100000000001, 10000002, '
 insert into connections values(connections_id.nextval, 100000000003, 10000002, 'how is the car condition?', to_date('2023-01-23', 'yyyy-mm-dd'));
 
 
-insert into inventory values('LGWEFSEE3DFA333F2',10000001,300000000001, 5000000001,'Black', 'red', 'clean', '2000', to_date('2000-01-03', 'yyyy-mm-dd') , '0');
-insert into inventory values('LGWSSSDE3DFAWS3SS',10000002,300000000002, 5000000002,'white', 'white', 'clean', '3000', to_date('2019-01-03', 'yyyy-mm-dd') , '0');
-insert into inventory values('LVWEDDSEE3EFA534F',10000002,300000000003, 5000000003,'Grey', 'Black', 'clean', '3050', to_date('2021-11-21', 'yyyy-mm-dd') , '0');
+insert into inventory values('LGWEFSEE3DFA333F2',10000001,300000000001, 'Black', 'red', 'clean', '2000', to_date('2000-01-03', 'yyyy-mm-dd') , '0');
+insert into inventory values('LGWSSSDE3DFAWS3SS',10000002,300000000002, 'white', 'white', 'clean', '3000', to_date('2019-01-03', 'yyyy-mm-dd') , '0');
+insert into inventory values('LVWEDDSEE3EFA534F',10000002,300000000003, 'Grey', 'Black', 'clean', '3050', to_date('2021-11-21', 'yyyy-mm-dd') , '0');
 select interior_color from inventory where vin='LVWEDDSEE3EFA534F';
 
 select * from Features;

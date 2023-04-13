@@ -62,6 +62,8 @@ FROM
     JOIN dealer d ON inv.did = d.did;
 /
 describe vehicle_listing_view;
+select * from vehicle_listing_view;
+
 -- select dealer_name, phone_number from dealer;
 -- update dealer set phone_number=959663 where dealer_name='ABC Motors';
 
@@ -97,14 +99,12 @@ describe dealerships;
 
 --Vehicle Model Detailed View
 CREATE VIEW vehicle_model_detailed_view AS
-SELECT cm.model_name, m.make_name, f.cylinders, f.mpg, f.fuel, f.drive_type, f.transmission,
-f.sunroof, f.moonroof, f.heated_seats, f.multimedia, f.cruise_control
+SELECT m.make_name, cm.model_name, cm.model_trim, cm.body_style, cm.weight, cm.year_introduced
 FROM car_model cm
-JOIN features f ON cm.mid = f.mid
 JOIN manufacturer m ON cm.fid = m.fid;
 /
 describe vehicle_model_detailed_view;
-
+--select * from vehicle_model_detailed_view;
 
 --Dealer Inventory View
 CREATE VIEW dealer_inventory_view AS
@@ -112,10 +112,11 @@ SELECT d.dealer_name,d.address, i.vin, cm.model_name, cm.body_style, i.interior_
 i.miles, i.date_added, i.title
 FROM dealer d
 JOIN inventory i ON d.did = i.did
-JOIN car_model cm ON i.mid = cm.mid;
+JOIN car_model cm ON i.mid = cm.mid
+JOIN features f ON i.vin = f.vin;
 /
 describe dealer_inventory_view;
-
+select * from dealer_inventory_view;
 --Favorite Vehicle View
 CREATE VIEW favorite_vehicle_view AS
 SELECT 
