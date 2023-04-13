@@ -73,6 +73,26 @@ end;
 
 --select * from g9.car_model where model_name = 'A6' and model_trim='basic' and year_introduced=to_date('2000-03-03','yyyy-mm-dd');
 
--- Test pkg_favorites_mgmt
+-- Test pkg_manufacturer_mgmt
+describe g9.pkg_manufacturer_mgmt;
 
---
+DECLARE 
+    v_fid number;
+begin
+    v_fid:=g9.pkg_manufacturer_mgmt.upsert_manufacturer('Jeep', 'U.S.A.', 'Affiliated with Chrysler', '1980');
+    dbms_output.put_line(to_char(v_fid));
+end;
+/
+
+select * from g9.manufacturer where make_name='Jeep';
+
+
+-- Test pkg_features_mgmt
+select * from g9.features;
+exec g9.pkg_features_mgmt.insert_features(300000000003, 6, '18/22', 'gas', 'le', 'Auto', 'y', 'y', 'y','y', 'y');
+exec g9.pkg_features_mgmt.update_features(5000000006, 300000000003, 6, '18/22', 'gas', '4wd', 'Auto', '1', '1', '1','1', '1');
+
+
+/
+
+select * from g9.manufacturer where make_name='Jeep';

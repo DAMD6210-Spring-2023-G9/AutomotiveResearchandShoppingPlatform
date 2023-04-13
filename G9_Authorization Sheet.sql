@@ -10,4 +10,3 @@ grant all on car_model to ming, zongyao, fangyu;
 grant all on features to ming, zongyao, fangyu;
 grant all on inventory to ming, zongyao, fangyu;
 
-grant create view to zongyao, ming, fangyu;

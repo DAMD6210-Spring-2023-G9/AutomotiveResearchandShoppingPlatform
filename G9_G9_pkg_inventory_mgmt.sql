@@ -1,7 +1,50 @@
-create or replace package body pkg_inventory_mgmt as
-    procedure upsert_inventory (pi_dealer_id varchar, pi_vin varchar, pi_make varchar, pi_interior_color varchar, pi_exterior_color varchar, pi_title varchar, pi_miles varchar, pi_is_hidden varchar);
-    
-end pkg_inventory_mgmt;
-/
-
-
+--create or replace package body pkg_inventory_mgmt as
+--    function upsert_inventory (pi_dealer_name varchar, pi_vin varchar, pi_make varchar, pi_interior_color varchar, pi_exterior_color varchar, pi_title varchar, pi_miles varchar, pi_is_hidden varchar) return number
+--        is
+--            ex_null_arg exception;
+--        begin
+--            if pi_dealer_name is null or pi_vin is null then
+--                raise ex_null_arg;
+--            end if;
+--            select fid
+--            merge into inventory tgt using (select 
+--                pi_dealer_name dealer_name, 
+--                pi_vin vin, 
+--                pi_make make, 
+--                pi_interior_color interior, 
+--                pi_exterior_color exterior, 
+--                pi_title title, pi_miles miles, 
+--                pi_is_hidden is_hidden from dual) src on ( tgt.dealer_name=src.dealer_name)
+--            when matched then update set 
+--                tgt.vin = src.vin,
+--                tgt.mid = (select mid from manufacturer where make_name=src.make),
+--                tgt.inverior_color=src.interior,
+--                tgt.exterior = src.exterior,
+--                tgt.title=src.title,
+--                tgt.is_hidden=src.is_hidden
+--            when not matched then insert (
+--                did,
+--                dealer_name,
+--                vin,
+--                mid,
+--                ftid,
+--                interior_color,
+--                
+--                
+--                    
+--        
+--        
+--        exception
+--            when ex_null_arg then
+--                dbms_output.put_line('pi_dealer_name');
+--            when others then
+--                dbms_output.put_line(SQLERRM);
+--
+--    
+--    
+--    end upsert_inventory;
+--    
+--end pkg_inventory_mgmt;
+--/
+--
+--
