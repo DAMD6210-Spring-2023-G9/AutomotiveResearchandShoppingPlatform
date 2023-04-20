@@ -64,7 +64,7 @@ exec g9.pkg_inventory_mgmt.delete_inventory ('AAAAAAAAAAAAAAAAA');
 -- Test pkg_features_mgmt
 select * from g9.features;
 exec g9.pkg_features_mgmt.insert_features('AAAAAAAAAAAAAAAAA', 6, '18/22', 'gas', 'le', 'Auto', 'y', 'y', 'y','y', 'y');
-exec g9.pkg_features_mgmt.update_features(5000000006, 300000000003, 6, '18/22', 'gas', '4wd', 'Auto', '1', '1', '1','1', '1');
+exec g9.pkg_features_mgmt.update_features('AAAAAAAAAAAAAAAAA', 6, '18/22', 'gas', '4wd', 'Auto', '1', '1', '1','1', '1');
 /
 
 
